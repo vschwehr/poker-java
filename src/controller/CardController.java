@@ -5,7 +5,6 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.Card;
 import model.Deck;
 import model.Hand;
 import model.Player;
@@ -18,7 +17,6 @@ public class CardController {
 
 	private ArrayList<Player> players;
 	private final Deck deck;
-	private ArrayList<Card> communityCards;
 	private int index;
 
 	public CardController(ArrayList<Player> players, Deck deck) {
@@ -34,16 +32,6 @@ public class CardController {
 				index += 2;
 			}
 		}
-	}
-	
-	public ArrayList<Card> dealCommunityCards() {
-		communityCards = new ArrayList<Card>();
-		int i;
-		for(i = index; i <= index+5; i++) {
-			communityCards.add(deck.get(i));
-		}
-		index = i;
-		return communityCards;
 	}
 	
 }
