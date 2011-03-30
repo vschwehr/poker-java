@@ -122,10 +122,10 @@ public class HandController {
 	 * community cards.
 	 */
 	private int checkValueEquality(ArrayList<Card> cards) {
-		
 		ArrayList<Card> residual = new ArrayList<Card>();
 		ArrayList<Card> pair1 = new ArrayList<Card>();
 		ArrayList<Card> pair2 = new ArrayList<Card>();
+		
 		if(cards.size() >= 4) {
 			for(int i = 0; i < cards.size()-1; i++) {
 				for(int j = i+1; j < cards.size(); j++) {
@@ -135,16 +135,23 @@ public class HandController {
 						pair1.add(cards.get(i));
 						pair1.add(cards.get(j));
 						break;
-					} else if(!residual.contains(cards.get(j))){ 
-						residual.add(cards.get(j));
 					}
 				}
+				if(pair1.size() == 2) {
+					break;
+				}
 			}
+			for(Card card : cards) {
+				if(!pair1.contains(card)) {
+					residual.add(card);
+				}
+			}
+			
 			if(points == PAIR) {
 				for(int i = 0; i < residual.size()-1; i++) {
 					for(int j = i+1; j < residual.size(); j++) {
-						if(residual.get(i).getValue() 
-								== residual.get(j).getValue()) {
+						if(!residual.get(i).equals(residual.get(j)) &&
+								residual.get(i).getValue() == residual.get(j).getValue()) {
 							points = TWO_PAIR;
 							pair2.add(residual.get(i));
 							pair2.add(residual.get(j));
@@ -161,6 +168,7 @@ public class HandController {
 					}
 				}
 			}
+			
 			if(points == TWO_PAIR) {
 				for(int i = 0; i < pair1.size(); i++) {
 					if(pair1.get(i).getValue() == pair2.get(i).getValue()) {
@@ -169,6 +177,7 @@ public class HandController {
 				}
 			}
 		}
+		
 		return points;
 	}
 
