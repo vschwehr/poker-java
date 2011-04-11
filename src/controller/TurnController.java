@@ -21,12 +21,16 @@ public class TurnController {
 	
 	public TurnController(ArrayList<Player> players, ScoreController sc) {
 		this.players = players;
-		this.playerQueue = new LinkedList<Player>(this.players);
 		this.sc = sc;
+		this.setQueue();
 		this.setBigBlind();
 		this.setSmallBlind();
 		this.setDealer();
 		this.doBettingRound();
+	}
+	
+	private void setQueue() {
+		this.playerQueue = new LinkedList<Player>(this.players);
 	}
 	
 	private void doBettingRound() {

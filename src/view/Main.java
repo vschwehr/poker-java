@@ -9,6 +9,7 @@ import model.Deck;
 import model.Player;
 import controller.CardController;
 import controller.HandController;
+import controller.PlayerController;
 import controller.ScoreController;
 import controller.ShuffleController;
 import controller.TurnController;
@@ -16,22 +17,22 @@ import controller.TurnController;
 public class Main {
 	
 	private static Deck deck;
-	private static ArrayList<Player> players;
 	private static final int SMALL_BLIND = 5;
 	private static final int BIG_BLIND = SMALL_BLIND * 2;
+	private static PlayerController pc;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		players = new ArrayList<Player>();
+		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Vernon", 500));
 		players.add(new Player("Chanel", 500));
 		players.add(new Player("Avita", 500));
 		players.add(new Player("Richmond", 500));
 		players.add(new Player("Richard", 500));
-		Collections.shuffle(players);
+		pc = new PlayerController(players);
 		
 		System.out.println("Welcome to schwehringHil's Texas Hold'em!");
 		System.out.println("Small blinds will be: $"+SMALL_BLIND);
@@ -46,7 +47,7 @@ public class Main {
 		CardController cc = new CardController(players, deck);
 		cc.dealDeck();
 		
-		for(Player player : players) {
+		for(Player player : pc.getPlayers()) {
 			System.out.println(player.printPlayer());
 		}
 		
