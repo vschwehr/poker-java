@@ -1,16 +1,17 @@
 /**
  * 
  */
-package controller;
+package client.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import model.Card;
-import model.CommunityCards;
-import model.Hand;
-import model.Player;
+import client.model.Card;
+import client.model.CommunityCards;
+import client.model.Hand;
+import client.model.Player;
+
 
 /**
  * @author Vernon Schwehr

@@ -1,18 +1,19 @@
-package view;
+package client.view;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import model.Card;
-import model.CommunityCards;
-import model.Deck;
-import model.Player;
-import controller.CardController;
-import controller.HandController;
-import controller.PlayerController;
-import controller.ScoreController;
-import controller.ShuffleController;
-import controller.TurnController;
+import client.controller.CardController;
+import client.controller.HandController;
+import client.controller.PlayerController;
+import client.controller.ScoreController;
+import client.controller.ShuffleController;
+import client.controller.TurnController;
+import client.model.Card;
+import client.model.CommunityCards;
+import client.model.Deck;
+import client.model.Player;
+
 
 public class Main {
 	

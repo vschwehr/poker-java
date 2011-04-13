@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model;
+package client.model;
 
 /**
  * @author Vernon Schwehr

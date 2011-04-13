@@ -9,7 +9,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-import view.MainMenu;
+import client.view.MainMenu;
+
 
 /**
  * @author Vernon Schwehr

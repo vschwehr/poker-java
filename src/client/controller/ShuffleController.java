@@ -1,12 +1,13 @@
 /**
  * 
  */
-package controller;
+package client.controller;
 
 import java.util.Collections;
 
-import model.Card;
-import model.Deck;
+import client.model.Card;
+import client.model.Deck;
+
 
 /**
  * 

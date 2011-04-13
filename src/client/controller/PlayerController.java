@@ -1,12 +1,13 @@
 /**
  * 
  */
-package controller;
+package client.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import model.Player;
+import client.model.Player;
+
 
 /**
  * @author vs

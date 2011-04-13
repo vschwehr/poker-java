@@ -1,13 +1,14 @@
 /**
  * 
  */
-package controller;
+package client.controller;
 
 import java.util.ArrayList;
 
-import model.Deck;
-import model.Hand;
-import model.Player;
+import client.model.Deck;
+import client.model.Hand;
+import client.model.Player;
+
 
 /**
  * @author Vernon Schwehr

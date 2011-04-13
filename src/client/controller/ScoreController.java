@@ -1,11 +1,12 @@
 /**
  * 
  */
-package controller;
+package client.controller;
 
 import java.util.ArrayList;
 
-import model.Player;
+import client.model.Player;
+
 
 /**
  * @author Vernon Schwehr

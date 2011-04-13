@@ -1,13 +1,14 @@
 /**
  * 
  */
-package controller;
+package client.controller;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import model.Player;
+import client.model.Player;
+
 
 /**
  * @author Vernon Schwehr
