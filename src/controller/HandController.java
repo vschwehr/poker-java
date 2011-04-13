@@ -108,6 +108,44 @@ public class HandController {
 
 	private int checkFlush(ArrayList<Card> cards) {
 		// TODO Auto-generated method stub
+		ArrayList<Card> sameSuit = new ArrayList<Card>();
+		ArrayList<Card> otherSuit = new ArrayList<Card>();
+		
+		boolean isFlush = true;
+		if(cards.size() >= 5) {
+			for(int i = 0; i < cards.size()-1; i++) {
+				String suit1 = cards.get(i).getSuit();
+				for(int j = i; j < cards.size(); j++) {
+					String suit2 = cards.get(j).getSuit();
+					if(suit1.equals(suit2) 
+							&& !sameSuit.contains(cards.get(j))) {
+						if(!sameSuit.contains(cards.get(i))) {
+							sameSuit.add(cards.get(i));
+						}
+						sameSuit.add(cards.get(j));
+					} 
+				}
+				if(sameSuit.size() > 0 && sameSuit.size() < 3) {
+					otherSuit.clear();
+					for(int j = 0; j < sameSuit.size(); j++) {
+						otherSuit.add(sameSuit.get(i));
+					}
+					sameSuit.clear();
+				}
+				if(sameSuit.size() >= 3 && sameSuit.size() < 5) {
+					isFlush = false;
+					break;
+				}
+				if(sameSuit.size() >= 5) {
+					isFlush = true;
+					break;
+				}
+			}
+		}
+		
+		if(isFlush) {
+			points = FLUSH;
+		}
 		
 		return points;		
 	}
@@ -122,6 +160,7 @@ public class HandController {
 	 * For checking for pair, two pair, 3 of a kind, or 4 of a kind in the 
 	 * community cards.
 	 */
+	//TODO: Check for Full House (value equality)
 	private int checkValueEquality(ArrayList<Card> cards) {
 		ArrayList<Card> residual = new ArrayList<Card>();
 		ArrayList<Card> pair1 = new ArrayList<Card>();
