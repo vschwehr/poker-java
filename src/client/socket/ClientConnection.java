@@ -20,6 +20,11 @@ public class ClientConnection {
 	public static void connect() {
 		try {
 			clientSocket = new Socket(HOST, PORT);
+			
+			ClientRunnable runnable = new ClientRunnable(clientSocket);
+			
+			Thread newThread = new Thread(runnable);
+			newThread.start();
 		} catch (UnknownHostException e) {
 			System.err.println("UnknownHostException: "+e.getMessage());
 			System.exit(-1);
