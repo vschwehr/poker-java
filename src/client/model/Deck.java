@@ -15,10 +15,10 @@ public class Deck extends ArrayList<Card>{
 	 * 
 	 */
 	private static final long serialVersionUID = -7721847752713001124L;
-	private static final String HEART = "heart";
-	private static final String DIAMOND = "diamond";
-	private static final String SPADE = "spade";
-	private static final String CLUB = "club";
+	public static final String HEART = "heart";
+	public static final String DIAMOND = "diamond";
+	public static final String SPADE = "spade";
+	public static final String CLUB = "club";
 	
 	public Deck() {
 		initHeart();

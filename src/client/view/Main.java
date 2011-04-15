@@ -1,14 +1,13 @@
 package client.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import client.controller.CardController;
 import client.controller.HandController;
 import client.controller.PlayerController;
 import client.controller.ScoreController;
 import client.controller.ShuffleController;
-import client.controller.TurnController;
+import client.controller.RoundController;
 import client.model.Card;
 import client.model.CommunityCards;
 import client.model.Deck;
@@ -43,7 +42,7 @@ public class Main {
 		System.out.println("Big blinds will be: $"+BIG_BLIND);
 		
 		ScoreController scc = new ScoreController(players, SMALL_BLIND);
-		TurnController tc = new TurnController(players, scc);
+		RoundController tc = new RoundController(players, scc);
 		
 		ShuffleController sc = new ShuffleController();
 		sc.doShuffle();
@@ -90,7 +89,7 @@ public class Main {
 		System.out.println("Big blinds will be: $"+BIG_BLIND);
 		
 		ScoreController scc = new ScoreController(players, SMALL_BLIND);
-		TurnController tc = new TurnController(players, scc);
+		RoundController rc = new RoundController(players, scc);
 		
 		ShuffleController sc = new ShuffleController();
 		sc.doShuffle();
@@ -102,8 +101,8 @@ public class Main {
 			System.out.println(player.printPlayer());
 		}
 		
-		while(tc.hasNext()) {
-			Player currentPlayer = tc.nextPlayer();
+		while(rc.hasNext()) {
+			Player currentPlayer = rc.nextPlayer();
 			//do blinds
 			//wait for player input to bet
 		}

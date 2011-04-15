@@ -5,9 +5,11 @@ package client.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import client.model.Card;
+import client.model.CardComparator;
 import client.model.CommunityCards;
 import client.model.Hand;
 import client.model.Player;
@@ -19,16 +21,16 @@ import client.model.Player;
  */
 public class HandController {
 	
-	private static final int ROYAL_FLUSH = 10;
-	private static final int STRAIGHT_FLUSH = 9;
-	private static final int FOUR_OF_A_KIND = 8;
-	private static final int FULL_HOUSE = 7;
-	private static final int FLUSH = 6;
-	private static final int STRAIGHT = 5;
-	private static final int THREE_OF_A_KIND = 4;
-	private static final int TWO_PAIR = 3;
-	private static final int PAIR = 2;
-	private static final int HIGH_CARD = 1; 
+	public static final int ROYAL_FLUSH = 10;
+	public static final int STRAIGHT_FLUSH = 9;
+	public static final int FOUR_OF_A_KIND = 8;
+	public static final int FULL_HOUSE = 7;
+	public static final int FLUSH = 6;
+	public static final int STRAIGHT = 5;
+	public static final int THREE_OF_A_KIND = 4;
+	public static final int TWO_PAIR = 3;
+	public static final int PAIR = 2;
+	public static final int HIGH_CARD = 1; 
 
 	private final HashMap<Player, Hand> hands;
 	private final CommunityCards cCards;
@@ -112,7 +114,7 @@ public class HandController {
 		ArrayList<Card> sameSuit = new ArrayList<Card>();
 		ArrayList<Card> otherSuit = new ArrayList<Card>();
 		
-		boolean isFlush = true;
+		boolean isFlush = false;
 		if(cards.size() >= 5) {
 			for(int i = 0; i < cards.size()-1; i++) {
 				String suit1 = cards.get(i).getSuit();
@@ -151,15 +153,34 @@ public class HandController {
 		return points;		
 	}
 
+	/**
+	 * For checking a straight in the cards given.
+	 */
 	private int checkStraight(ArrayList<Card> cards) {
 		// TODO Auto-generated method stub
+		Collections.sort(cards, new CardComparator());
+		
+		for(int i = 0; i < cards.size()-1; i++) {
+			int firstVal = cards.get(i).getValue();
+			int nextVal = cards.get(i+1).getValue();
+			int count = 0;
+			while((firstVal == (nextVal-1)) || ((firstVal-1) == nextVal)) {
+				count++;
+				firstVal = nextVal;
+				nextVal = nextVal++;
+			}
+			if(count == 5) {
+				points = STRAIGHT;
+				break;
+			}
+		}
 		
 		return points;
 	}
 
 	/**
-	 * For checking for pair, two pair, 3 of a kind, or 4 of a kind in the 
-	 * community cards.
+	 * For checking for pair, two pair, 3 of a kind, 4 of a kind, or 
+	 * full house in the community cards.
 	 */
 	//TODO: Check for Full House (value equality)
 	private int checkValueEquality(ArrayList<Card> cards) {

@@ -17,6 +17,10 @@ public class ClientConnection {
 	private static final int PORT = 2233;
 	private static Socket clientSocket;
 	
+	public static void main(String args[]) {
+		connect();
+	}
+	
 	public static void connect() {
 		try {
 			clientSocket = new Socket(HOST, PORT);

@@ -14,13 +14,13 @@ import client.model.Player;
  * @author Vernon Schwehr
  *
  */
-public class TurnController {
+public class RoundController {
 
 	private final ArrayList<Player> players;
 	private Queue<Player> playerQueue;
 	private ScoreController sc;
 	
-	public TurnController(ArrayList<Player> players, ScoreController sc) {
+	public RoundController(ArrayList<Player> players, ScoreController sc) {
 		this.players = players;
 		this.sc = sc;
 		this.setQueue();
