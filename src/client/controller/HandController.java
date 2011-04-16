@@ -112,13 +112,12 @@ public class HandController {
 	private int checkFlush(ArrayList<Card> cards) {
 		// TODO Auto-generated method stub
 		ArrayList<Card> sameSuit = new ArrayList<Card>();
-		ArrayList<Card> otherSuit = new ArrayList<Card>();
 		
 		boolean isFlush = false;
 		if(cards.size() >= 5) {
 			for(int i = 0; i < cards.size()-1; i++) {
 				String suit1 = cards.get(i).getSuit();
-				for(int j = i; j < cards.size(); j++) {
+				for(int j = i+1; j < cards.size(); j++) {
 					String suit2 = cards.get(j).getSuit();
 					if(suit1.equals(suit2) 
 							&& !sameSuit.contains(cards.get(j))) {
@@ -128,16 +127,8 @@ public class HandController {
 						sameSuit.add(cards.get(j));
 					} 
 				}
-				if(sameSuit.size() > 0 && sameSuit.size() < 3) {
-					otherSuit.clear();
-					for(int j = 0; j < sameSuit.size(); j++) {
-						otherSuit.add(sameSuit.get(i));
-					}
+				if(sameSuit.size() > 0 && sameSuit.size() < 5) {
 					sameSuit.clear();
-				}
-				if(sameSuit.size() >= 3 && sameSuit.size() < 5) {
-					isFlush = false;
-					break;
 				}
 				if(sameSuit.size() >= 5) {
 					isFlush = true;

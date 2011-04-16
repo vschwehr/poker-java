@@ -165,8 +165,8 @@ public class HandControllerTest {
 	@Test
 	public void testPair() {
 		cards.clear();
-		cards.add(new Card(Deck.HEART, 14));
-		cards.add(new Card(Deck.DIAMOND, 14));
+		cards.add(new Card(Deck.HEART, 13));
+		cards.add(new Card(Deck.DIAMOND, 13));
 		cards.add(new Card(Deck.HEART, 12));
 		cards.add(new Card(Deck.HEART, 3));
 		cards.add(new Card(Deck.HEART, 4));
