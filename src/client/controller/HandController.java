@@ -5,7 +5,6 @@ package client.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import client.model.Card;
@@ -35,8 +34,8 @@ public class HandController {
 	private final HashMap<Player, Hand> hands;
 	private final CommunityCards cCards;
 	private final ArrayList<Player> players;
-	private int points;
-	private int playerPoints;
+	private int points = 0;
+	//private int playerPoints;
 	private int cCardPoints;
 	
 	public HandController(ArrayList<Player> players, CommunityCards cCards) {
@@ -74,43 +73,84 @@ public class HandController {
 			cards.add(cCards.get(3));
 			cards.add(cCards.get(4));
 			
-			if(points == 0)
-				setcCardPoints(checkRoyalFlush(cards));
-			if(points == 0)
-				setcCardPoints(checkStraightFlush(cards));
-			if(points == 0)
-				setcCardPoints(checkFullHouse(cards));
-			if(points == 0)
-				setcCardPoints(checkFlush(cards));
-			if(points == 0)
-				setcCardPoints(checkStraight(cards));
-			if(points == 0)
-				setcCardPoints(checkValueEquality(cards));
-			if(points == 0)
-				setcCardPoints(checkHighCard(cards));
+			int points = 0;
+			
+			points = checkRoyalFlush(cards);
+			
+			if(points != ROYAL_FLUSH) {
+				points = checkStraightFlush(cards);
+				
+				if(points != STRAIGHT_FLUSH) {
+					points = checkFlush(cards);
+					
+					if(points != FLUSH) {
+						points = checkStraight(cards);
+						
+						if(points != STRAIGHT) {
+							points = checkValueEquality(cards);
+							//FOUR_OF_A_KIND
+							//FULL_HOUSE
+							//THREE_OF_A_KIND
+							//TWO_PAIR
+							//PAIR
+							setcCardPoints(points);
+							
+							if(points == 0) {
+								points = checkHighCard(cards);
+								setcCardPoints(points);//HIGH_CARD
+							}
+						
+						} else {
+							setcCardPoints(points);//STRAIGHT
+						}
+						
+					} else {
+						setcCardPoints(points);//FLUSH
+					}
+					
+				} else {
+					setcCardPoints(points);//STRAIGHT_FLUSH
+				}
+				
+			} else {
+				setcCardPoints(points);//ROYAL_FLUSH
+			}
 		}
 	}
 
 	private int checkRoyalFlush(ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		int points = 0;
+		
+		Collections.sort(cards, new CardComparator());
+		
+		if(checkFlush(cards) == FLUSH) {
+			if(cards.get(0).getValue() == 1) {
+				if(cards.get(1).getValue() == 10) {
+					if(cards.get(2).getValue() == 11) {
+						if(cards.get(3).getValue() == 12) {
+							if(cards.get(4).getValue() == 13) {
+								points = ROYAL_FLUSH;
+							}
+						}
+					}
+				}
+			}
+		}
 		
 		return points;
 	}
 
 	private int checkStraightFlush(ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		int points = 0;
 		
-		return points;
-	}
-
-	private int checkFullHouse(ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		if(checkStraight(cards) == STRAIGHT_FLUSH) {
+			points = STRAIGHT_FLUSH;
+		}
 		
 		return points;
 	}
 
 	private int checkFlush(ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
 		ArrayList<Card> sameSuit = new ArrayList<Card>();
 		
 		boolean isFlush = false;
@@ -137,8 +177,14 @@ public class HandController {
 			}
 		}
 		
+		int points = 0;
+		
 		if(isFlush) {
-			points = FLUSH;
+			if(this.points == STRAIGHT) {
+				points = STRAIGHT_FLUSH;
+			} else {
+				points = FLUSH;
+			}
 		}
 		
 		return points;		
@@ -148,21 +194,28 @@ public class HandController {
 	 * For checking a straight in the cards given.
 	 */
 	private int checkStraight(ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
 		Collections.sort(cards, new CardComparator());
-		
 		int count = 1;
+		int points = 0;
+		
 		for(int i = 0; i < cards.size()-1; i++) {
 			int firstVal = cards.get(i).getValue();
 			int nextVal = cards.get(i+1).getValue();
 			
-			if((firstVal == (nextVal-1)) || ((firstVal-1) == nextVal)) {
+			if(firstVal == (nextVal-1)) {
 				count++;
 			}
 			
 			if(count == 5) {
 				points = STRAIGHT;
 				break;
+			}
+		}
+		
+		if(points == STRAIGHT) {
+			this.points = STRAIGHT;
+			if(checkFlush(cards) == STRAIGHT_FLUSH) {
+				points = STRAIGHT_FLUSH;
 			}
 		}
 		
@@ -173,27 +226,18 @@ public class HandController {
 	 * For checking for pair, two pair, 3 of a kind, 4 of a kind, or 
 	 * full house in the community cards.
 	 */
-	//TODO: Check for Full House (value equality)
 	private int checkValueEquality(ArrayList<Card> cards) {
 		ArrayList<Card> residual = new ArrayList<Card>();
 		ArrayList<Card> pair1 = new ArrayList<Card>();
 		ArrayList<Card> pair2 = new ArrayList<Card>();
+		int points = 0;
 		
 		if(cards.size() >= 4) {
-			for(int i = 0; i < cards.size()-1; i++) {
-				for(int j = i+1; j < cards.size(); j++) {
-					if(!cards.get(i).equals(cards.get(j)) && 
-							cards.get(i).getValue() == cards.get(j).getValue()) {
-						points = PAIR;
-						pair1.add(cards.get(i));
-						pair1.add(cards.get(j));
-						break;
-					}
-				}
-				if(pair1.size() == 2) {
-					break;
-				}
-			}
+			pair1 = checkPair(cards);
+			
+			if(pair1.size() == 2)
+				points = PAIR;	
+			
 			for(Card card : cards) {
 				if(!pair1.contains(card)) {
 					residual.add(card);
@@ -201,33 +245,45 @@ public class HandController {
 			}
 			
 			if(points == PAIR) {
-				for(int i = 0; i < residual.size()-1; i++) {
-					for(int j = i+1; j < residual.size(); j++) {
-						if(!residual.get(i).equals(residual.get(j)) &&
-								residual.get(i).getValue() == residual.get(j).getValue()) {
-							points = TWO_PAIR;
-							pair2.add(residual.get(i));
-							pair2.add(residual.get(j));
-							break;
+				pair2 = checkPair(residual);
+				
+				if(pair2.size() == 2)
+					points = TWO_PAIR;
+				
+				ArrayList<Card> threeOfAKind = new ArrayList<Card>();
+				for(int i = 0; i < residual.size(); i++) {
+					if(residual.get(i).getValue() 
+							== pair1.get(0).getValue()) {
+						points = THREE_OF_A_KIND;
+					}
+					
+					if(cards.size() >= 5) {
+						if(i < residual.size()-1) {
+							if(residual.get(i).getValue() 
+									== residual.get(i+1).getValue()) {
+								if(!threeOfAKind.contains(residual.get(i))) {
+									threeOfAKind.add(residual.get(i));
+								}
+								
+								if(!threeOfAKind.contains(residual.get(i+1))) {
+									threeOfAKind.add(residual.get(i+1));
+								}
+							}
 						}
 					}
 				}
-				if(points == PAIR) {
-					for(int i = 0; i < residual.size(); i++) {
-						if(residual.get(i).getValue() 
-								== pair1.get(0).getValue()) {
-							points = THREE_OF_A_KIND;
-						}
-					}
+				
+				if(threeOfAKind.size() == 3 && pair1.size() == 2) {
+					points = FULL_HOUSE;
+					return points;
 				}
 			}
 			
-			if(points == TWO_PAIR) {
-				for(int i = 0; i < pair1.size(); i++) {
-					if(pair1.get(i).getValue() == pair2.get(i).getValue()) {
-						points = FOUR_OF_A_KIND;
-					}	
-				}
+			for(int i = 0; i < pair1.size() && i < pair2.size(); i++) {
+				if(pair1.get(i).getValue() == pair2.get(i).getValue()) {
+					points = FOUR_OF_A_KIND;
+					return points;
+				}	
 			}
 		}
 		
@@ -235,19 +291,43 @@ public class HandController {
 	}
 
 	/**
+	 * @param cards
+	 * @param pair1
+	 */
+	private ArrayList<Card> checkPair(ArrayList<Card> cards) {
+		ArrayList<Card> pair = new ArrayList<Card>();
+		
+		for(int i = 0; i < cards.size()-1; i++) {
+			for(int j = i+1; j < cards.size(); j++) {
+				if(!cards.get(i).equals(cards.get(j)) && 
+						cards.get(i).getValue() == cards.get(j).getValue()) {
+					pair.add(cards.get(i));
+					pair.add(cards.get(j));
+					break;
+				}
+			}
+			if(pair.size() == 2) {
+				break;
+			}
+		}
+		
+		return pair;
+	}
+
+	/**
 	 * For checking high cards in the community cards.
 	 */
 	private int checkHighCard(ArrayList<Card> cards) {
-		if(points != 0)
-			points = 0;
-		
 		int max = 0;
+		int points = 0;
+		
 		for(int i = 0; i < cards.size(); i++) {
 			if(cards.get(i).getValue() > max) {
 				max = cards.get(i).getValue();
 				points = HIGH_CARD;
 			}
 		}
+		
 		return points;
 	}
 
@@ -268,7 +348,7 @@ public class HandController {
 	/**
 	 * @param cCardPoints the cCardPoints to set
 	 */
-	public void setcCardPoints(int cCardPoints) {
+	private void setcCardPoints(int cCardPoints) {
 		this.cCardPoints = cCardPoints;
 	}
 
