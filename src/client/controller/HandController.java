@@ -151,15 +151,15 @@ public class HandController {
 		// TODO Auto-generated method stub
 		Collections.sort(cards, new CardComparator());
 		
+		int count = 1;
 		for(int i = 0; i < cards.size()-1; i++) {
 			int firstVal = cards.get(i).getValue();
 			int nextVal = cards.get(i+1).getValue();
-			int count = 0;
-			while((firstVal == (nextVal-1)) || ((firstVal-1) == nextVal)) {
+			
+			if((firstVal == (nextVal-1)) || ((firstVal-1) == nextVal)) {
 				count++;
-				firstVal = nextVal;
-				nextVal = nextVal++;
 			}
+			
 			if(count == 5) {
 				points = STRAIGHT;
 				break;

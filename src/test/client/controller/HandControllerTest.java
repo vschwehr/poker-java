@@ -121,10 +121,10 @@ public class HandControllerTest {
 	public void testStraight() {
 		cards.clear();
 		cards.add(new Card(Deck.CLUB, 4));
-		cards.add(new Card(Deck.DIAMOND, 5));
-		cards.add(new Card(Deck.SPADE, 6));
-		cards.add(new Card(Deck.HEART, 7));
-		cards.add(new Card(Deck.DIAMOND, 8));
+		cards.add(new Card(Deck.DIAMOND, 6));
+		cards.add(new Card(Deck.SPADE, 5));
+		cards.add(new Card(Deck.HEART, 8));
+		cards.add(new Card(Deck.DIAMOND, 7));
 		
 		testHc = new HandController(testPlayers, cards);
 		
