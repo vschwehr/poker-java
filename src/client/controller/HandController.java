@@ -36,6 +36,7 @@ public class HandController {
 	private final ArrayList<Player> players;
 	private int points = 0;
 	private int playerPoints;
+	//private ArrayList<Card> cards;
 	
 	public HandController(ArrayList<Player> players, CommunityCards cCards) {
 		this.players = players;

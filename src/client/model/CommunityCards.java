@@ -38,10 +38,6 @@ public class CommunityCards extends ArrayList<Card>{
 		deckIndex = i;
 	}
 	
-	public ArrayList<Card> getFlop() {
-		return flop;
-	}
-	
 	private void setTurn() {
 		turn = deck.get(deckIndex);
 		this.add(turn);
@@ -49,17 +45,9 @@ public class CommunityCards extends ArrayList<Card>{
 		deckIndex++;
 	}
 	
-	public Card getTurn() {
-		return turn;
-	}
-	
 	private void setRiver() {
 		river = deck.get(deckIndex);
 		this.add(river);
-	}
-	
-	public Card getRiver() {
-		return river;
 	}
 	
 }
