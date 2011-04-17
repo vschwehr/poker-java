@@ -3,3 +3,18 @@ schwehringHil development
 
 My first poker game development. This will be tested as a C program after Java
 program has been completed.
+
+Completed:
+-simulates one whole turn (without betting)
+-sorts deck and distributes 2 cards to each player and 5 cards to the Community Cards
+-set blinds and dealer to players
+-deal all 5 community cards (all at once at the moment)
+-scores the 5 community cards
+
+To do:
+-include player hand scoring to community cards
+-set up the rounds (betting round, dealing the flop/river/turn)
+-distribute winnings after round
+
+In development/planning:
+poker server (Java based) with client connections
