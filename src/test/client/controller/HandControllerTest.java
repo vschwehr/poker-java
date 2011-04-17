@@ -53,7 +53,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.ROYAL_FLUSH, testHc.getcCardPoints());
 	}
 	
@@ -68,7 +68,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.STRAIGHT_FLUSH, testHc.getcCardPoints());
 	}
 	
@@ -83,7 +83,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.FOUR_OF_A_KIND, testHc.getcCardPoints());
 	}
 	
@@ -98,7 +98,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.FULL_HOUSE, testHc.getcCardPoints());
 	}
 
@@ -113,7 +113,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.FLUSH, testHc.getcCardPoints());
 	}
 	
@@ -128,7 +128,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.STRAIGHT, testHc.getcCardPoints());
 	}
 	
@@ -143,7 +143,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.THREE_OF_A_KIND, testHc.getcCardPoints());
 	}
 	
@@ -158,7 +158,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.TWO_PAIR, testHc.getcCardPoints());
 	}
 	
@@ -173,7 +173,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.PAIR, testHc.getcCardPoints());
 	}
 	
@@ -188,7 +188,7 @@ public class HandControllerTest {
 		
 		testHc = new HandController(testPlayers, cards);
 		
-		testHc.doAnalyzeCCards();
+		testHc.doAnalyzeCards();
 		assertEquals(HandController.HIGH_CARD, testHc.getcCardPoints());
 	}
 

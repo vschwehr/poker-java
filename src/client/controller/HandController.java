@@ -35,8 +35,7 @@ public class HandController {
 	private final CommunityCards cCards;
 	private final ArrayList<Player> players;
 	private int points = 0;
-	//private int playerPoints;
-	private int cCardPoints;
+	private int playerPoints;
 	
 	public HandController(ArrayList<Player> players, CommunityCards cCards) {
 		this.players = players;
@@ -47,31 +46,31 @@ public class HandController {
 		this.cCards = cCards;
 	}
 	
-	public void doAnalyzeCCards() {
+	public void doAnalyzeCards() {
 		ArrayList<Card> cards = new ArrayList<Card>();
-		if(cCards.size() == 3) {
+		if(cCards.size() == 2) {
 			cards.add(cCards.get(0));
 			cards.add(cCards.get(1));
 			cards.add(cCards.get(2));
 			
-			setcCardPoints(checkHighCard(cards));
-			setcCardPoints(checkValueEquality(cards));
-		} 
-		if(cCards.size() == 4) {
-			cards.add(cCards.get(0));
-			cards.add(cCards.get(1));
-			cards.add(cCards.get(2));
-			cards.add(cCards.get(3));
+			int points = 0;
 			
-			setcCardPoints(checkHighCard(cards));
-			setcCardPoints(checkValueEquality(cards));
+			points = checkValueEquality(cards);
+			//FOUR_OF_A_KIND
+			//FULL_HOUSE
+			//THREE_OF_A_KIND
+			//TWO_PAIR
+			//PAIR
+			setcCardPoints(points);
+			
+			if(points == 0) {
+				points = checkHighCard(cards);
+				setcCardPoints(points);//HIGH_CARD
+			}
 		} 
-		if(cCards.size() == 5) {
-			cards.add(cCards.get(0));
-			cards.add(cCards.get(1));
-			cards.add(cCards.get(2));
-			cards.add(cCards.get(3));
-			cards.add(cCards.get(4));
+		
+		if(cCards.size() >= 5) {
+			cards.addAll(cCards);
 			
 			int points = 0;
 			
@@ -349,14 +348,14 @@ public class HandController {
 	 * @param cCardPoints the cCardPoints to set
 	 */
 	private void setcCardPoints(int cCardPoints) {
-		this.cCardPoints = cCardPoints;
+		this.playerPoints = cCardPoints;
 	}
 
 	/**
 	 * @return the cCardPoints
 	 */
 	public int getcCardPoints() {
-		return cCardPoints;
+		return playerPoints;
 	}
 	
 }

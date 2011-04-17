@@ -66,7 +66,7 @@ public class Main {
 			System.out.println(card.toString());
 		}
 		HandController hc = new HandController(players, communityCards);
-		hc.doAnalyzeCCards();
+		hc.doAnalyzeCards();
 		System.out.println(hc.getcCardPoints());
 	}
 
@@ -113,7 +113,7 @@ public class Main {
 		}
 
 		HandController hc = new HandController(players, communityCards);
-		hc.doAnalyzeCCards();
+		hc.doAnalyzeCards();
 		System.out.println("Community Card points: " + hc.getcCardPoints());
 	}
 
