@@ -1,7 +1,7 @@
 /**
  * 
  */
-package client.socket.model;
+package client.model;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;

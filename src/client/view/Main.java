@@ -10,9 +10,9 @@ import client.controller.PlayerController;
 import client.controller.ScoreController;
 import client.controller.ShuffleController;
 import client.controller.RoundController;
+import client.model.Client;
 import client.model.Deck;
 import client.model.Player;
-import client.socket.model.Client;
 
 public class Main {
 

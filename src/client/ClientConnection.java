@@ -1,7 +1,7 @@
 /**
  * 
  */
-package client.socket;
+package client;
 
 import java.io.IOException;
 import java.net.Socket;

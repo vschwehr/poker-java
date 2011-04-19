@@ -1,7 +1,7 @@
 /**
  * 
  */
-package client.socket;
+package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-import client.socket.model.Client;
+import client.model.Client;
 import client.view.Main;
 
 /**
